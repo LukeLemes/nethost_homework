@@ -1,0 +1,31 @@
+<VirtualHost *:80>
+    ServerAdmin webmaster@yourdomain.com
+    ServerName yourdomain.com
+    DocumentRoot /var/www/html/wordpress
+    DirectoryIndex index.php
+
+    # WordPress-specific settings
+    <Directory /var/www/html/wordpress>
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    # Log settings
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    # Optional: Redirect HTTP to HTTPS
+    # RewriteEngine On
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    <FilesMatch \.php$>
+        SetHandler "proxy:unix:/run/php/php7.4-fpm.sock|fcgi://localhost"
+    </FilesMatch>
+    
+    <Directory /var/www/html/wordpress/wp-admin>
+        Order Deny,Allow
+        Deny from all
+        Allow from 127.0.0.1
+    </Directory>
+</VirtualHost>

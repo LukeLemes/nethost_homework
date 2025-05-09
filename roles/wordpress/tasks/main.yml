@@ -1,0 +1,46 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for wordpress
+
+- name: Dowload wordpress install
+  get_url:
+    url: "{{ wordpress_url_download }}"
+    dest: '/var/www/html/wordpress.tar.gz'
+  register: wordpress_install
+
+- name: Extract wordpress install
+  command:
+    cmd: | 
+      tar -v -xzf "{{ wordpress_install }}" -C /var/www/html/
+      chown -R www-data:www-data "{{ wordpres_web_dir }}"
+      chmod 755 "{{ wordpres_web_dir }}"
+      find "{{ wordpres_web_dir }}" -type d -exec chmod 755 {} \;
+      find "{{ wordpres_web_dir }}" -type f -exec chmod 644 {} \;
+      rm -f "{{ wordpress_install }}"
+
+- name: Create wordpress DB
+  command:
+    cmd: |
+      cat <<EOF > sql.sql
+        CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+        CREATE USER 'wpuser'@'localhost' IDENTIFIED BY 'your_secure_password';
+        GRANT ALL PRIVILEGES ON wordpress.* TO 'wpuser'@'localhost';
+        FLUSH PRIVILEGES;
+        EXIT;
+      EOF
+      mysql < sql.sql
+      rm -f sql.sql
+
+- name: Create wordpress web
+  template:
+    src: 'templates/wordpres.conf.j2'
+    dest: '/etc/apache2/site-avaiable/wordpress.conf'
+
+- name: Copy wordpress conf
+  copy:
+    src: 'files/wp-config-sample.php'
+    dest: "{{ wordpres_web_dir }}/wp-config.php"
+
+#- name: Get wordpress 
+#  get_url:
+#    url: 'https://api.wordpress.org/secret-key/1.1/salt/'

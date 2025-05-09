@@ -1,0 +1,11 @@
+#SPDX-License-Identifier: MIT-0
+---
+# defaults file for apache-webserver
+apache_base_confdir: '/etc/apache2'
+apache_site_default: 'site-available'
+apache_site_enabled: 'sites-enabled'
+
+apache_site_default_path: "{{ apache_base_confdir }}/{{ apache_site_default }}"
+apache_site_enabled_path: "{{ apache_base_confdir }}/{{ apache_site_enabled }}"
+
+apache_default_site: "{{ apache_base_confdir }}/{{ apache_site_enabled }}/000-default.conf"

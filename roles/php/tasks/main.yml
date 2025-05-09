@@ -1,0 +1,28 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for php
+
+- name: Install php engine
+  package:
+    name: "{{ item }}"
+    state: 'latest'
+  with_items:
+    - php
+    - php-cli
+    - php-pear
+
+- name: Install php engine modules
+  package:
+    name: "{{ }}"
+    state: 'latest'
+  when: wordpress_modules = True
+  with_items:
+   - php-mysql
+   - php-curl
+   - php-gd
+   - php-mbstring
+   - php-xml
+   - php-xmlrpc
+   - php-soap
+   - php-intl
+   - php-zip

@@ -1,0 +1,159 @@
+2025-05-07 11:47:12,240 p=36870 u=luk3 n=ansible WARNING| [WARNING]: Platform linux on host server is using the discovered Python interpreter at /usr/bin/python3.11, but future installation of another Python interpreter could change the meaning of that
+path. See https://docs.ansible.com/ansible-core/2.18/reference_appendices/interpreter_discovery.html for more information.
+
+2025-05-07 11:47:12,241 p=36870 u=luk3 n=ansible INFO| server | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3.11"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+2025-05-09 01:39:23,048 p=58911 u=luk3 n=ansible INFO| {
+    "_meta": {
+        "hostvars": {
+            "server": {
+                "ansible_host": "82.208.18.55"
+            },
+            "server-test": {
+                "ansible_host": "192.168.1.189"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "nethost"
+        ]
+    },
+    "nethost": {
+        "hosts": [
+            "server-test"
+        ]
+    },
+    "ungrouped": {
+        "hosts": [
+            "server"
+        ]
+    }
+}
+2025-05-09 01:40:20,759 p=58992 u=luk3 n=ansible INFO| server-test | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: luk3@192.168.1.189: Permission denied (publickey,password).",
+    "unreachable": true
+}
+2025-05-09 01:42:46,430 p=59366 u=luk3 n=ansible INFO| {
+    "_meta": {
+        "hostvars": {
+            "server": {
+                "ansible_host": "82.208.18.55"
+            },
+            "server-test": {
+                "ansible_host": "192.168.1.189"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "nethost"
+        ]
+    },
+    "nethost": {
+        "hosts": [
+            "server-test"
+        ]
+    },
+    "ungrouped": {
+        "hosts": [
+            "server"
+        ]
+    }
+}
+2025-05-09 01:42:49,042 p=59373 u=luk3 n=ansible WARNING| [WARNING]: Platform linux on host server-test is using the discovered Python interpreter at /usr/bin/python3.11, but future installation of another Python interpreter could change the meaning of
+that path. See https://docs.ansible.com/ansible-core/2.18/reference_appendices/interpreter_discovery.html for more information.
+
+2025-05-09 01:42:49,042 p=59373 u=luk3 n=ansible INFO| server-test | FAILED! => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3.11"
+    },
+    "changed": false,
+    "module_stderr": "Shared connection to 192.168.1.189 closed.\r\n",
+    "module_stdout": "/bin/sh: 1: sudo: not found\r\n",
+    "msg": "MODULE FAILURE: No start of json char found\nSee stdout/stderr for the exact error",
+    "rc": 127
+}
+2025-05-09 01:43:21,933 p=59454 u=luk3 n=ansible WARNING| [WARNING]: Platform linux on host server-test is using the discovered Python interpreter at /usr/bin/python3.11, but future installation of another Python interpreter could change the meaning of
+that path. See https://docs.ansible.com/ansible-core/2.18/reference_appendices/interpreter_discovery.html for more information.
+
+2025-05-09 01:43:21,933 p=59454 u=luk3 n=ansible INFO| server-test | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3.11"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+2025-05-09 02:13:22,161 p=61853 u=luk3 n=ansible WARNING| [WARNING]: ifle was not found
+
+2025-05-09 05:13:48,190 p=3538958 u=luk3 n=ansible INFO| {
+    "_meta": {
+        "hostvars": {
+            "server": {
+                "ansible_host": "82.208.18.55"
+            },
+            "server-test": {
+                "ansible_host": "192.168.1.189"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "nethost"
+        ]
+    },
+    "nethost": {
+        "hosts": [
+            "server-test"
+        ]
+    },
+    "ungrouped": {
+        "hosts": [
+            "server"
+        ]
+    }
+}
+2025-05-09 05:14:36,156 p=3539002 u=luk3 n=ansible WARNING| [WARNING]: Platform linux on host server is using the discovered Python interpreter at /usr/bin/python3.11, but future installation of another Python interpreter could change the meaning of that
+path. See https://docs.ansible.com/ansible-core/2.18/reference_appendices/interpreter_discovery.html for more information.
+
+2025-05-09 05:14:36,156 p=3539002 u=luk3 n=ansible INFO| server | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3.11"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+2025-05-09 05:15:00,183 p=3539069 u=luk3 n=ansible ERROR| ERROR! 'host' is not a valid attribute for a Play
+
+The error appears to be in '/usr/local/src/Jobs_prjs/nethost/ansible/playbooks/get_server_info.yaml': line 1, column 3, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+
+- host: all
+  ^ here
+
+2025-05-09 05:15:16,809 p=3539104 u=luk3 n=ansible INFO| [DEPRECATION WARNING]: community.general.yaml has been deprecated. The plugin has been superseded by the the option `result_format=yaml` in callback plugin ansible.builtin.default from ansible-core 
+2.13 onwards. This feature will be removed from community.general in version 13.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2025-05-09 05:15:16,850 p=3539104 u=luk3 n=ansible INFO| PLAY [all] ********************************************************************************************************************************************************************************************
+2025-05-09 05:15:16,856 p=3539104 u=luk3 n=ansible INFO| TASK [List /etc directories] **************************************************************************************************************************************************************************
+2025-05-09 05:15:17,942 p=3539104 u=luk3 n=ansible WARNING| [WARNING]: Platform linux on host server is using the discovered Python interpreter at /usr/bin/python3.11, but future installation of another Python interpreter could change the meaning of that
+path. See https://docs.ansible.com/ansible-core/2.18/reference_appendices/interpreter_discovery.html for more information.
+
+2025-05-09 05:15:17,942 p=3539104 u=luk3 n=ansible INFO| changed: [server]
+2025-05-09 05:15:17,946 p=3539104 u=luk3 n=ansible INFO| TASK [Get dist usaged] ********************************************************************************************************************************************************************************
+2025-05-09 05:15:18,826 p=3539104 u=luk3 n=ansible INFO| changed: [server]
+2025-05-09 05:15:18,830 p=3539104 u=luk3 n=ansible INFO| TASK [Get the biggest file] ***************************************************************************************************************************************************************************
+2025-05-09 05:15:19,707 p=3539104 u=luk3 n=ansible INFO| changed: [server]
+2025-05-09 05:15:19,709 p=3539104 u=luk3 n=ansible INFO| PLAY RECAP ********************************************************************************************************************************************************************************************
+2025-05-09 05:15:19,709 p=3539104 u=luk3 n=ansible INFO| server                     : ok=3    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   

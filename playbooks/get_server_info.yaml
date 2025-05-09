@@ -1,0 +1,30 @@
+- hosts: all
+  become: True
+  become_user: 'root'
+  
+  tasks:
+  - name: List /etc directories
+    async: 3600
+    poll: 0
+    shell:
+      cmd: "find /etc -type d > /etc.txt"
+
+  - name: Get dist usaged
+    async: 3600
+    poll: 0
+    shell:
+      cmd: "df -h > /space.txt"
+
+  - name: Get the biggest file
+    async: 3600
+    poll: 0
+    shell:
+      cmd: |
+        du -a --exclude="^/(etc|dev|sys|proc)" | sort -n -k 1 > all_files;
+        while read line;
+        do
+          path=$(echo $line | cut -d ' ' -f 2)
+          test -f $path && echo $line
+        done < ./all_files >> ./files
+        tac ./files | head -n 1 >> /space.txt
+        rm -f ./all_files ./files

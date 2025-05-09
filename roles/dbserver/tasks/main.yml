@@ -1,0 +1,26 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for dbserver
+
+- name: Install DB server (mariadb)
+  package:
+    name: "{{ item }}"
+    state: 'latest'
+  with_items:
+   - mariadb-server
+   - mariabd-test
+
+- name: Copy default DB server conf (mariadb)
+  template:
+    src: 'default-db-server.conf.j2'
+    dest: '/etc/mysql/mariadb.conf.d/50-server.cnf'
+  when: db_server_default_conf == True
+  handlers: mariadb_service_reload
+
+- name: Enable and start DB server (mariadb)
+  service:
+    name: 'mariadb'
+    state: "{{ item }}"
+  with_items:
+   - enabled
+   - start

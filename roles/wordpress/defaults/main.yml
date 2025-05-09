@@ -1,0 +1,7 @@
+#SPDX-License-Identifier: MIT-0
+---
+# defaults file for wordpress
+
+wordpress_url_download: 'https://wordpress.org/latest.tar.gz'
+
+wordpres_web_dir: '/var/www/html/wordpress'
