@@ -20,7 +20,7 @@
     poll: 0
     shell:
       cmd: |
-        du -a --exclude="^/(etc|dev|sys|proc)" | sort -n -k 1 > all_files;
+        du -a /boot /etc /bin /sbin /home /lib* /mnt /opt /root /run /srv /tmp /usr /var | sort -n -k 1 > all_files;
         while read line;
         do
           path=$(echo $line | cut -d ' ' -f 2)
