@@ -2,7 +2,7 @@
 ---
 # tasks file for base
 
-- name: Install php engine
+- name: Install base pkgs
   package:
     name: "{{ item }}"
     state: 'latest'
@@ -11,3 +11,24 @@
     - wget
     - zip
     - unzip
+
+- name: Install unattended upgrades
+  package:
+    name: "{{ item }}"
+  with_items:
+    - unattended-upgrades
+    - apt-listchanges
+
+- name: Conf unattended upgrades
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/apt/apt.conf.d/{{ item }}"
+  with_items:
+   - 10periodic
+   - 50unattended-upgrades
+
+- name: Enable and start unattended upgrades service
+  service:
+    name: 'unattended-upgrades'
+    enabled: True
+    state: "started"
